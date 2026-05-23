@@ -17,4 +17,8 @@ The objective of this lab is to develop my understanding of inter VLAN routing u
 
 <img width="590" height="437" alt="image" src="https://github.com/user-attachments/assets/c810622e-a831-4b10-a34d-93f6db29c05f" />
 
+<img width="1075" height="342" alt="image" src="https://github.com/user-attachments/assets/d62f0258-57f3-416f-94d6-121508a192f4" />
+
+
+
 
