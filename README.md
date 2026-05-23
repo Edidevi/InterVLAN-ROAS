@@ -19,6 +19,8 @@ The objective of this lab is to develop my understanding of inter VLAN routing u
 
 <img width="1075" height="342" alt="image" src="https://github.com/user-attachments/assets/d62f0258-57f3-416f-94d6-121508a192f4" />
 
+I was simulating a real office scenario, i i thought that an IT department would have alot more laptops due to support and programming 
+Hence  why i put 4 laptops
 
 
 
