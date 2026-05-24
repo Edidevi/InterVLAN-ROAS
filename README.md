@@ -1,26 +1,26 @@
 # InterVLAN-ROAS 
 The next step from VLANS, inter VLAN routing
-Cisco Packet Tracer lab exploring building inter vlan routing, using a mock company web layout
+Cisco Packet Tracer lab exploring building inter vlan routing, using a layer 3 switch
 
 ## 📌 Project Objective
-The objective of this lab is to develop my understanding of inter VLAN routing using a router
+The objective of this lab is to develop my understanding of inter VLAN routing using a layer 3 switch. There was the option to only use the router, but the layer 3 switch was a more viable option due to it's scalability.
 
-
-## 🛠️ Topology & Hardware Setup
+## 🛠️ Hardware 
 <img width="300" height="180" alt="image" src="https://github.com/user-attachments/assets/4c90d342-8499-41b4-b1c9-846a94d31be8" />
 
-- **Switches:** 1x Cisco Catalyst 2960 (SW1)
-- **Hosts:** 6x End Devices (PCs)
-- **Router** Connected via `FastEthernet 0/1` on both switches using a **copper cross-over cable**.
-
-<img width="582" height="220" alt="image" src="https://github.com/user-attachments/assets/eaa49f31-3e2d-405b-b4c8-68b40b23ef9f" />
-
-<img width="590" height="437" alt="image" src="https://github.com/user-attachments/assets/c810622e-a831-4b10-a34d-93f6db29c05f" />
-
-<img width="1075" height="342" alt="image" src="https://github.com/user-attachments/assets/d62f0258-57f3-416f-94d6-121508a192f4" />
+- **Switches:** 1x 3560 24PS , 1x Cisco Catalyst 2960 (SW1)
+- **Hosts:** 7x End Devices (PCs)
+- **Router** 2911 router
 
 I was simulating a real office scenario, i i thought that an IT department would have alot more laptops due to support and programming 
-Hence  why i put 4 laptops
+Hence  why i put 4 laptops.
+
+## Questions I had while building
+
+1. Why couldn't i use one switch for the set up? I have a newfound knowledge of VLANs and it woud allow me to put multiple devices on the same switch while keeping the information seperate. Adding another switch seems like using extra hardware unessecarily. ***I think that for a lab, the one switch architecture would be fine, but my aim in this lab is also to simulate a real life enterprise network***
+
+2. Why didn't I use a router instead of layer 3 switch? Don't they do the same thing?
+
 
 
 
