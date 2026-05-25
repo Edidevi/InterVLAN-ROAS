@@ -1,12 +1,15 @@
 # InterVLAN-L3 
 The next step from VLANS, inter VLAN routing
 Cisco Packet Tracer lab exploring building inter vlan routing, using a layer 3 switch
+<br clear="left" />
 
-## 📌 Project Objective
+<img width="400" height="400" alt="image" align="left" src="https://github.com/user-attachments/assets/9ffc8ac7-3831-475e-8861-6a104f37e3cc" />
+
+### 📌 Project Objective
+
 The objective of this lab is to develop my understanding of inter VLAN routing using a layer 3 switch. There was the option to only use the router, but the layer 3 switch was a more viable option due to it's scalability.
 
-## 🛠️ Hardware 
-<img width="300" height="180" alt="image" src="https://github.com/user-attachments/assets/4c90d342-8499-41b4-b1c9-846a94d31be8" />
+### 🛠️ Hardware 
 
 - **Switches:** 1x 3560 24PS , 1x Cisco Catalyst 2960 (SW1)
 - **Hosts:** 7x End Devices (PCs)
@@ -14,27 +17,19 @@ The objective of this lab is to develop my understanding of inter VLAN routing u
 
 I was simulating a real office scenario, i i thought that an IT department would have alot more laptops due to support and programming 
 Hence  why i put 4 laptops.
-
+<br clear="left" />
 ## Questions I had while building
 
 1. Why couldn't i use one switch for the set up? I have a newfound knowledge of VLANs and it woud allow me to put multiple devices on the same switch while keeping the information seperate. Adding another switch seems like using extra hardware unessecarily. ***I think that for a lab, the one switch architecture would be fine, but my aim in this lab is also to simulate a real life enterprise network. In a real world enterprise lab, each floor/wing would ideally get its own access switch, and I am dealing with 2 parts of a buisness IT and HR.***
 
-2. Why do i need to configure vlans as interfaces?I am confused how the layer 3 switch can have two ip addresses. ***I had to come to understand that it was the logical SV interfaces inside the Layer 3 switch that are actign as the default gateways, not the physcial. I was so used to assigning Ip addresses to physical things that it was difficult to conceptualise at first***
+2. Why do i need to configure vlans as interfaces?I am confused how the layer 3 switch can have two ip addresses. ***I had to come to understand that it was the logical SV interfaces inside the Layer 3 switch that are acting as the default gateways, not the physical. I was so used to assigning Ip addresses to physical things that it was difficult to conceptualise at first. Without the vlan interfaces, D1 has no layer 3 presence to route data between the VLANs at the network layer***
 
-3. WHat is stopping the layer 3 switch from handing out the incorrect DHCP pool? How would it know? i am confused, because it seems in the code for dhcp, the vlan 5 part is string. Im curiois how the switch would know ? does it only assign it based in ip address assigned to vlan interface? ***Since in this labe
+3. WHat is stopping the layer 3 switch from handing out the incorrect DHCP pool? How would it know? i am confused, because it seems in the code for dhcp, the vlan 5 part is string. Im curious as to how the switch would know ? does it only assign DHCP info based on ip address assigned to vlan interface? **It seems that the DHCP pool name is indeed just string, just a name for me. The only thing that the L3 switch uses is the SVI that the data arrives on, so it assignes the data based on that**
 
 4. Why do i need to make the connection between the switches and the layer 3 switch as a turnk port? I thought the trunk port was only for when you are carrying two types of tagged traffic? ***I think this is one instance of a trunk port being used, but the ports connecting the switches to the layer 3 switch need to be ttrunk ports because the L3 switch needs to know which traffic belongs to which VLAN. If i keep the ports as access ports, then the tags will be stripped, which will leave L3 switch int he dark and will assing the wrong ip addresses to devices***
 
-5. What is dot1q? Why did i have to enter a command before enabling trunking on the layer 3 switch? ***dot1q (802.1Q) is the standard protocol that defines how VLAN tags are added to Ethernet frames.
-When a frame needs to travel across a trunk link, dot1q inserts a 4 byte tag into the frame containing:
-text
-Copy
-| Destination MAC | Source MAC | 802.1Q Tag | Type | Data |
-                               ↑
-                          VLAN ID lives here (e.g. VLAN 5)
-That tag is what tells the receiving switch which VLAN the frame belongs to.
-It's a standard — meaning all vendors (Cisco, HP, Juniper) agree on the same tagging format. That's why switches from different manufacturers can trunk with each other.
-The reason the 3560 asks you to specify it is because older Cisco switches also supported a Cisco proprietary trunking protocol called ISL — which wrapped the entire frame instead of inserting a tag. dot1q won and ISL is now obsolete, but the 3560 still supports both so you have to tell it which one to use.**
+5. What is dot1q? Why did i have to enter a command before enabling trunking on the layer 3 switch? ***dot1q (802.1Q) is the standard protocol that defines how VLAN tags are added to Ethernet frames.That tag is what tells the receiving switch which VLAN the frame belongs to.
+The reason the 3560 asks you to specify it is because older Cisco switches also supported another trunking protocol called ISL — which wrapped the entire frame instead of inserting a tag. dot1q is now the most used, but the 3560 still supports both so you have to tell it which one to use***
 
 <img width="487" height="135" alt="image" src="https://github.com/user-attachments/assets/4c4e60bb-62f2-40cf-9242-6a9702d844ca" />
 <img width="631" height="179" alt="image" src="https://github.com/user-attachments/assets/cb6cd994-0a4b-43ad-9f68-afd48592065d" />
