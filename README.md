@@ -62,6 +62,8 @@ i tried to make d1 input portd thst conect d1 to switch as trunk, but it was not
 
 <img width="911" height="564" alt="image" src="https://github.com/user-attachments/assets/05f52929-82a0-4546-bb24-4e8d79bf2ee6" />
 <img width="604" height="286" alt="image" src="https://github.com/user-attachments/assets/07b58160-6b1a-4cb7-8bea-59d18381450a" />
+<img width="704" height="268" alt="image" src="https://github.com/user-attachments/assets/eedbe822-33ca-4b32-a5da-6d24465be238" />
+
 
 
 
