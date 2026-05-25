@@ -1,4 +1,4 @@
-# InterVLAN-ROAS 
+# InterVLAN-L3 
 The next step from VLANS, inter VLAN routing
 Cisco Packet Tracer lab exploring building inter vlan routing, using a layer 3 switch
 
