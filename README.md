@@ -82,3 +82,10 @@ As of right now, the ip address didn't mathc the ip address of the vlan it was o
 
 
 
+
+
+## :chart_with_upwards_trend: Learning
+- From this lab i learnt how layer 3 switches can allow for intervaln routing, allowing people on differetn VLANs to communicate with each other
+- I kearnt how helpful dhcp pooling can be to assign the right ip addresses to pcs, without haivng to manually type 1 for every one.
+- I also learnt about dot1q.
+
