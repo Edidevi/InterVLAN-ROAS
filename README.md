@@ -41,18 +41,23 @@ Here are the commands i entered
 S1> enable
 S1# configure terminal
 S1(config)# interface range FastEthernet 0/1 - 3
-S1(config-if-range)# nswitchport mode access
+S1(config-if-range)# switchport mode access
 S1(config-if-range)# exit
 S1(config)# exit
 S1# write memory
 ```
-This 
-<img width="487" height="135" alt="image" src="https://github.com/user-attachments/assets/4c4e60bb-62f2-40cf-9242-6a9702d844ca" />
-<img width="631" height="179" alt="image" src="https://github.com/user-attachments/assets/cb6cd994-0a4b-43ad-9f68-afd48592065d" />
-added vlan to 
+This was done for both switches
 
-<img width="599" height="155" alt="image" src="https://github.com/user-attachments/assets/13344852-8c8a-40d6-9d6f-b1c5ac9114e8" />
-<img width="562" height="106" alt="image" src="https://github.com/user-attachments/assets/84a240ff-33b5-4639-84e2-db193a775639" />
+### 2. Enabled vlans 5 and 10 and assigned ports to vlans - vlan 5 for SW-IT and vlan 10 for SW-HR (S1 & S2)
+```text
+S1> enable
+S1# configure terminal
+S1(config)# vlan 5
+S1(config-vlan)# name HR
+S1(config-vlan)# exit
+S1(config)# interface range FastEthernet 0/1 - 3
+S1(config-if-range)# switchport access vlan 5
+```
 
 I then wanted to devleop a quicker way to assign the defult gateway for multiple pcs at once.So i created a DHCP pool on the alyer 3 switch for the vlan
 changed pc ip config to dhcp
