@@ -67,36 +67,67 @@ S1(config)# interface Gig0/1
 S1(config-if)# switchport mode trunk
 ```
 
+### 4. Attempted to enable the input layer 3 switch interfaces as trunks, so that the layer 3 switch could recieve the Vlan id tagged data from 5 and 10.
+
 I then attempted to make D1 input ports as trunk ports, but the system didn't let me!? I kept on getting an error message.
 <img width="753" height="146" alt="image" src="https://github.com/user-attachments/assets/9db80f39-e74f-4c27-accb-05c5842b1ad0" />
 
-After researching, i foind out that unlike the 2960 layer 2 switches that only support dot1q,  the layer 3 3560 supports multiple trunking protocols. So before enabling port as trunk, i have to specify which protocol i want. So following this realisation, I specificed the dot1q protocol, then I was able to enable the interfaces as trunks.
+After researching, i found out that unlike the 2960 layer 2 switches that only support dot1q,  the layer 3 3560 supports multiple trunking protocols. So before enabling port as trunk, i have to specify which protocol i want. So following this realisation, I specificed the dot1q protocol, then I was able to enable the interfaces as trunks.
 
 ```text
 
 S1(config)# interface FastEthernet0/1
 S1(config-if)# switchport trunk encapsulation dot1q
 S1(config-if)# switchport mode trunk
+
+```
+### 5. Enabled the Vlans as virtual interfaces on the switch, to act as default gateways to route between VLANs at layer 3
+
+```text
+Switch(config)#interface vlan 5
+Switch(config-if) #ip address 192.168.9.1
+Switch(config-if) #ip address 192.168.9.1 255.255.255.0
+Switch(config-if) #no shutdown
+Switch(config-if) #exit
+Switch(config) #interface vlan 10
+Switch(config-if) #ip address 192.168.13.1
+Switch(config-if) #ip address 192.168.13.1 255.255.255.0
+Switch(config-if) #no shutdown
+Switch(config-if) #exit
 ```
 
+The no shutdown command pushed the interfaces into an up state. Note how the default gateways where assigned ip addresses in the same subnet as the other devices on their vlan. 
 
+### 6. Configured a DHCP pool on the layer 3 switch, to allow assigning of ip addresses to hosts based on default gateway ip address network
 
-I then wanted to devleop a quicker way to assign the defult gateway for multiple pcs at once.So i created a DHCP pool on the alyer 3 switch for the vlan
-changed pc ip config to dhcp
+```
+Switch(config)#ip dhcp pool VLAN5
+Switch(dhcp-config)#network 192.168.9.0 255.255.255.0
+Switch(dhcp-config)#default-router 192.168.9.1
+Switch(dhcp-config)#exit
+Switch(config)#exit
+Switch#write memory
+
+Switch#conf t
+Switch(config)#ip dhcp pool VLAN10
+Switch(dhcp-config)#network 192.168.13.0 255.255.255.0
+Switch(dhcp-config)#default-router 192.169.13.1
+Switch(dhcp-config)#end
+Switch#conf t
+Switch(config)#ip routing
+Switch(config)#exit
+Switch#write memory
+
+```
+
+The `ip routing` command at the end, enables layer 3 routing on the switch, without it, the layer 3 switch is no different from the 2960s, in that it doesn't route on layer 3.
+
+### 7. I then switched the PC ip confguraitons in the PC settings menu to DHCP, allowing the Ip addresses to be automatically assigned 
 <img width="627" height="190" alt="image" src="https://github.com/user-attachments/assets/2c2346b4-ee8f-4cf9-a6f2-bfb68333f333" />
 
 
-I realised, the layer 3 switch is not going to know which dhcp pool to use for whihc vln. i forgot this, so i went back to assign access mode to output switch ports to layer 3 switch.
-<img width="519" height="145" alt="image" src="https://github.com/user-attachments/assets/4bd5c7e6-e26e-427c-ac9d-1d4cdde04384" />
-i did this for both
 
 
-
-When You come back osaru:
-ASSIGN PORTS CONNECTING SWITCHES AND L3 SWITCHES TOGETHER AS TRUNK PORTS
-
-<img width="627" height="212" alt="image" src="https://github.com/user-attachments/assets/63125461-be2e-4341-b47f-a0dd5fb63966" />
-i tried to make d1 input portd thst conect d1 to switch as trunk, but it was not letting me. I was confused as to why, byt using netpilot brought me this answer
 
 <img width="911" height="564" alt="image" src="https://github.com/user-attachments/assets/05f52929-82a0-4546-bb24-4e8d79bf2ee6" />
 <img width="604" height="286" alt="image" src="https://github.com/user-attachments/assets/07b58160-6b1a-4cb7-8bea-59d18381450a" />
