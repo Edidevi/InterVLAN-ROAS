@@ -122,82 +122,16 @@ Switch#write memory
 
 The `ip routing` command at the end, enables layer 3 routing on the switch, without it, the layer 3 switch is no different from the 2960s, in that it doesn't route on layer 3.
 
-### 7. I then switched the PC ip confguraitons in the PC settings menu to DHCP, allowing the Ip addresses to be automatically assigned 
-<img width="627" height="190" alt="image" src="https://github.com/user-attachments/assets/2c2346b4-ee8f-4cf9-a6f2-bfb68333f333" />
+### 7. Switched the PC ip confguraitons in the PC settings menu to DHCP, allowing the Ip addresses to be automatically assigned 
 
-
-
-
-
-<img width="911" height="564" alt="image" src="https://github.com/user-attachments/assets/05f52929-82a0-4546-bb24-4e8d79bf2ee6" />
-<img width="604" height="286" alt="image" src="https://github.com/user-attachments/assets/07b58160-6b1a-4cb7-8bea-59d18381450a" />
 <img width="704" height="268" alt="image" src="https://github.com/user-attachments/assets/eedbe822-33ca-4b32-a5da-6d24465be238" />
 
+### 8. Pinged Device on another vlan from a device in one VLAN
 
 
+<img width="475" height="208" alt="image" src="https://github.com/user-attachments/assets/7ba551bb-af9f-4469-9a81-7abb26c87eaa" />
 
-SORT OUT DHCP POOLING FOR DIFFERENT VLANS ON L3 SWITCH
-
-Now that vlans where known by layer 3 switch, atrunk was set up and vlans had ip addresses, i could now sort out dhcp pooling so that the correct ip addreses could be assigned to the pcs.
-<img width="931" height="138" alt="image" src="https://github.com/user-attachments/assets/e6bddfc5-dedf-49b3-9df8-83a2906a1a80" />
-
-As of right now, the ip address didn't mathc the ip address of the vlan it was on. FOr example, for hr, for one of pcs, their ip address is 169.254.0.blah, so it shows that dhcp pooling needs to be sorted for d1.
-
-<img width="485" height="60" alt="image" src="https://github.com/user-attachments/assets/bd44364f-910c-48c7-9610-4820a35c4d46" />
-<img width="506" height="58" alt="image" src="https://github.com/user-attachments/assets/4b8b1f0a-90de-49dd-82d0-3f93453eb01f" />
-
-<img width="549" height="387" alt="image" src="https://github.com/user-attachments/assets/6d246755-05b5-44f6-b6f7-8b677aa7f864" />
-<img width="965" height="312" alt="image" src="https://github.com/user-attachments/assets/b32c4b00-0ec6-4b2c-baa9-9cf52b10ba03" />
-
-After setting it all up, i tried to ping pc1 
-<img width="475" height="208" alt="image" src="https://github.com/user-attachments/assets/83a05fe1-fd82-4b7b-b637-de68a2f52f23" />
-
-
-Can see that, it can ping devices in same subnet, but can't ping devices in other subnet,
-must be a layer 3 switch issue 
-<img width="756" height="122" alt="image" src="https://github.com/user-attachments/assets/d78b3b63-83da-4ceb-a1f5-074f09576834" />
-typed shoow ip interface broef on layer 3 switch, to see if interface issue. Saw the trunk port was down, so, typed no shutdwon
-<img width="471" height="158" alt="image" src="https://github.com/user-attachments/assets/40cd9e54-b77d-4c18-92e6-f447ae122287" />
-checked mac addess table on vlan 5 and vlan 10 switches, it seems packets where eign recevoed, but was still confided why
-
-<img width="471" height="158" alt="image" src="https://github.com/user-attachments/assets/0047f252-f8bd-45b1-8a0c-64acabef2f51" />
-
-I wonder why the dauly gateway is a different netowrk
-<img width="444" height="162" alt="image" src="https://github.com/user-attachments/assets/39b415a8-2cf4-4018-8595-311f44e80093" />
-
-Seems it was not configured properly?
-I am sure i typed write memory
-<img width="529" height="110" alt="image" src="https://github.com/user-attachments/assets/7b2a203d-9a1c-434d-b7aa-1079fbe03673" />
-
-i did, then typed 
-
-<img width="409" height="275" alt="image" src="https://github.com/user-attachments/assets/383a831d-a9ea-4479-b2a0-bb2dbc7eec62" />
-
-after, went to pcs and refreshed by selecting static then dhcp to refresh dhcp config
-<img width="655" height="631" alt="image" src="https://github.com/user-attachments/assets/8740aa67-1fcc-4566-80b8-739874b622d3" />
-
-now this had been fixed, ran ping again from pc
-
-<img width="625" height="98" alt="image" src="https://github.com/user-attachments/assets/bc5b964c-f1cd-47c3-9738-4cad548a5979" />
-
-I was confused, so i ran traceroute to track the hops and see if it is evene reaching the routet. I coudl reach other devices in the subnet so it clearly was nto a switch problem
-
-<img width="541" height="159" alt="image" src="https://github.com/user-attachments/assets/faff5108-7486-404d-bf94-fec6727c7d7e" />
-
-SInce it wasn't even being routed, It had to be a layer 3 issue.
-I went to the switch and enabled ip routing, a command i forgot to employ, as without it, thw switch will act like a lyer 2 switch.
-
-
-I than ran traceroute again andthough i did not get the request timeed out message, i got the destination undreachable message.
-It hsows that traffic is now getting into d1, but d1 does not knwo what to do with it .
-
-<img width="612" height="138" alt="image" src="https://github.com/user-attachments/assets/62840c66-6acf-469c-9782-279e60b136ac" />
-
-It seems i forgot to create vlans as interfaces, to route on the layer 3 this is essential. 
-<img width="713" height="328" alt="image" src="https://github.com/user-attachments/assets/17b79660-49b0-4924-8eaf-aead71e35980" />
-
-All is fine, i was pinging the incoreect ip addres
-<img width="539" height="199" alt="image" src="https://github.com/user-attachments/assets/b43684f9-9529-4811-945e-08fc9c9f6044" />
+I pinged devices on the same VLAN and devices on other VLANs, the pings where succesful.
 
 ## :chart_with_upwards_trend: Learning
 - From this lab i learnt how layer 3 switches can allow for intervaln routing, allowing people on differetn VLANs to communicate with each other
