@@ -18,6 +18,8 @@ The objective of this lab is to develop my understanding of inter VLAN routing u
 I was simulating a real office scenario, i i thought that an IT department would have alot more laptops due to support and programming 
 Hence  why i put 4 laptops.
 <br clear="left" />
+
+
 ## Questions I had while building
 
 1. Why couldn't i use one switch for the set up? I have a newfound knowledge of VLANs and it woud allow me to put multiple devices on the same switch while keeping the information seperate. Adding another switch seems like using extra hardware unessecarily. ***I think that for a lab, the one switch architecture would be fine, but my aim in this lab is also to simulate a real life enterprise network. In a real world enterprise lab, each floor/wing would ideally get its own access switch, and I am dealing with 2 parts of a buisness IT and HR.***
@@ -31,6 +33,20 @@ Hence  why i put 4 laptops.
 5. What is dot1q? Why did i have to enter a command before enabling trunking on the layer 3 switch? ***dot1q (802.1Q) is the standard protocol that defines how VLAN tags are added to Ethernet frames.That tag is what tells the receiving switch which VLAN the frame belongs to.
 The reason the 3560 asks you to specify it is because older Cisco switches also supported another trunking protocol called ISL — which wrapped the entire frame instead of inserting a tag. dot1q is now the most used, but the 3560 still supports both so you have to tell it which one to use***
 
+## 💻 Cisco IOS Configuration Steps
+Here are the commands i entered 
+
+### 1. Enabled the access ports  (S1 & S2)
+```text
+S1> enable
+S1# configure terminal
+S1(config)# interface range FastEthernet 0/1 - 3
+S1(config-if-range)# nswitchport mode access
+S1(config-if-range)# exit
+S1(config)# exit
+S1# write memory
+```
+This 
 <img width="487" height="135" alt="image" src="https://github.com/user-attachments/assets/4c4e60bb-62f2-40cf-9242-6a9702d844ca" />
 <img width="631" height="179" alt="image" src="https://github.com/user-attachments/assets/cb6cd994-0a4b-43ad-9f68-afd48592065d" />
 added vlan to 
