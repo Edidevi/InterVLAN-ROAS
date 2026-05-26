@@ -59,6 +59,28 @@ S1(config)# interface range FastEthernet 0/1 - 3
 S1(config-if-range)# switchport access vlan 5
 ```
 
+### 3. Enabled the switch output ports connected to layer 3 switch as trunk ports, to carry tagged traffic to L3 switch (S1 & S2)
+```text
+S1> en
+S1# conf t
+S1(config)# interface Gig0/1
+S1(config-if)# switchport mode trunk
+```
+
+I then attempted to make D1 input ports as trunk ports, but the system didn't let me!? I kept on getting an error message.
+<img width="753" height="146" alt="image" src="https://github.com/user-attachments/assets/9db80f39-e74f-4c27-accb-05c5842b1ad0" />
+
+After researching, i foind out that unlike the 2960 layer 2 switches that only support dot1q,  the layer 3 3560 supports multiple trunking protocols. So before enabling port as trunk, i have to specify which protocol i want. So following this realisation, I specificed the dot1q protocol, then I was able to enable the interfaces as trunks.
+
+```text
+
+S1(config)# interface FastEthernet0/1
+S1(config-if)# switchport trunk encapsulation dot1q
+S1(config-if)# switchport mode trunk
+```
+
+
+
 I then wanted to devleop a quicker way to assign the defult gateway for multiple pcs at once.So i created a DHCP pool on the alyer 3 switch for the vlan
 changed pc ip config to dhcp
 <img width="627" height="190" alt="image" src="https://github.com/user-attachments/assets/2c2346b4-ee8f-4cf9-a6f2-bfb68333f333" />
